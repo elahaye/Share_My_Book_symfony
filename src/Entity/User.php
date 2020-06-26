@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
- *  normalizationContext={"groups"={"users_read"}}
+ *  normalizationContext={"groups"={"user:read"}}
  * )
  */
 class User implements UserInterface
@@ -22,13 +22,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"users_read"})
+     * @Groups({"user:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"users_read"})
+     * @Groups({"user:read"})
      */
     private $email;
 
@@ -45,24 +45,24 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"users_read"})
+     * @Groups({"user:read"})
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"users_read"})
      */
     private $avatar;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"users_read"})
+     * @Groups({"user:read"})
      */
     private $registrationDate;
 
     /**
      * @ORM\OneToMany(targetEntity=Booklist::class, mappedBy="creatorId", orphanRemoval=true)
+     * @Groups({"user:read"})
      */
     private $booklists;
 

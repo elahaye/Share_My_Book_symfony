@@ -62,17 +62,16 @@ class AppFixtures extends AbstractFixture
             $manager->flush();
         }
 
-        // // Booklists
-        // $this->createMany(BookList::class, 3, function (Booklist $bookList) {
-        //     $bookList->setName($this->faker->catchPhrase())
-        //         ->setCategory($this->getRandomReference(Category::class))
-        //         ->setCreatorId($this->getRandomReference(User::class))
-        //         ->setCreatedAt($this->faker->dateTimeBetween('-1 month'))
-        //         ->setStatus("public");
+        // Booklists
+        $this->createMany(BookList::class, 3, function (Booklist $bookList) {
+            $bookList->setName($this->faker->catchPhrase())
+                ->setCreatorId($this->getRandomReference(User::class))
+                ->setCreatedAt($this->faker->dateTimeBetween('-1 month'))
+                ->setStatus("public");
 
-        //     for ($i = 0; $i < 10; $i++) {
-        //         $bookList->addBook($this->getRandomReference(Book::class));
-        //     }
-        // });
+            for ($i = 0; $i < 10; $i++) {
+                $bookList->addBook($this->getRandomReference(Book::class));
+            }
+        });
     }
 }

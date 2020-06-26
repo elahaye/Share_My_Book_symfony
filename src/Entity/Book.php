@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\BookRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -16,36 +18,43 @@ class Book
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "booklist:read"})
      */
     private $referenceApi;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "booklist:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "booklist:read"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $summary;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $publicationDate;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $totalPages;
 

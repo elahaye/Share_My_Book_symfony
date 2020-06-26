@@ -7,10 +7,13 @@ use App\Repository\BooklistRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BooklistRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"booklist:read"}}
+ * )
  */
 class Booklist
 {
@@ -18,37 +21,44 @@ class Booklist
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "booklist:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "booklist:read"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="booklists")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"booklist:read"})
      */
     private $creatorId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="booklists")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="booklists")
+     * @Groups({"user:read", "booklist:read"})
      */
     private $books;
 
