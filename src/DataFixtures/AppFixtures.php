@@ -21,7 +21,7 @@ class AppFixtures extends AbstractFixture
     public function loadData(ObjectManager $manager)
     {
         // Users
-        $this->createMany(User::class, 5, function (User $user, $u) {
+        $this->createMany(User::class, 20, function (User $user, $u) {
             $user->setEmail("user$u@gmail.com")
                 ->setNickname($this->faker->name())
                 ->setAvatar($this->faker->imageUrl(250, 250))
@@ -63,7 +63,7 @@ class AppFixtures extends AbstractFixture
         }
 
         // Booklists
-        $this->createMany(BookList::class, 3, function (Booklist $bookList) {
+        $this->createMany(BookList::class, 20, function (Booklist $bookList) {
             $bookList->setName($this->faker->catchPhrase())
                 ->setCreatorId($this->getRandomReference(User::class))
                 ->setCreatedAt($this->faker->dateTimeBetween('-1 month'))

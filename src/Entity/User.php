@@ -2,18 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
- *  normalizationContext={"groups"={"user:read"}}
+ *  normalizationContext={"groups"={"user:read"}},
+ *  collectionOperations={"GET","POST"},
+ *  itemOperations={"GET","PUT", "PATCH"}
  * )
  */
 class User implements UserInterface
@@ -63,6 +66,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Booklist::class, mappedBy="creatorId", orphanRemoval=true)
      * @Groups({"user:read"})
+     * @ApiSubresource()
      */
     private $booklists;
 

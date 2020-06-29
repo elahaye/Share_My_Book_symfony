@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=BooklistRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups"={"booklist:read"}}
+ *   normalizationContext={"groups"={"booklist:read"}}
  * )
  */
 class Booklist

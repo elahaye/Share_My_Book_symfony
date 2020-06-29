@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des bookLists{% endblock %}
+
+{% block body %}
+<h1>Liste des bookLists créées</h1>
+
+<table class="table">
+<thead>
+    <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Catégorie</th>
+        <th>Statut</th>
+        <th>Créé par </th>
+        <th>Créée le </th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+    {% for booklist in booklists %}
+    <tr>
+        <td>{{booklist.id }}</td>
+        <td>{{booklist.name }}</td>
+        <td>{% if booklist.category is empty %} /
+            {% else %} {{booklist.category.name}}
+            {% endif %}</td>
+        <td>{{booklist.status}}</td>
+        <td>{{booklist.creatorId.nickname}}</td>
+        <td>{{booklist.createdAt | date('d/m/Y') }}</td>
+        <td>
+            <a href="{{ path('booklist_delete', {'id': booklist.id}) }}" class="btn btn-danger"><i class="fas fa-ban"></i></a>
+        </td>
+    </tr> 
+    {% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

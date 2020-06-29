@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion à l'administration{% endblock %}
+
+{% block body %}
+
+    <h1>Connexion</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-secondary">Connexion</button>
+
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -38,6 +38,12 @@ security:
       anonymous: true
       lazy: true
       provider: app_user_provider
+      logout:
+        path: admin_security_logout
+        target: /login
+      form_login:
+        login_path: admin_security_login
+        check_path: admin_security_login
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -49,6 +55,7 @@ security:
   access_control:
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - {
         path: ^/api/users,

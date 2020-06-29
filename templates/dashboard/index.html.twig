@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<h1 class="display-4 m-4">Administration</h1>
+
+<div class="card bg-light mb-3 m-auto" style="max-width: 50rem;">
+    <div class="card-header">Informations utiles</div>
+    <div class="card-body">
+        <p class="card-text">Nombre d'utilisateurs enregistrés : {{ users | length }}</p>
+        <p class="card-text">Nombre de booklists enregistrés : {{ booklists | length }}</p>
+    </div>
+</div>
+
+<div class="container m-4">
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover m-auto">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Les 10 derniers utilisateurs enregistrés : </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users | slice(0, 10) %}
+                    <tr>
+                        <td>{{ user.nickname }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col">
+            <table class="table table-hover m-auto">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Les 10 dernières booklists créées : </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booklist in booklists | slice(0, 10) %}
+                    <tr>
+                        <td>"{{ booklist.name }}" de {{ booklist.creatorId.nickname }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
