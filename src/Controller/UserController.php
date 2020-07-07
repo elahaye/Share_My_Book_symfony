@@ -5,9 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use InvalidArgumentException;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends AbstractController
 {
@@ -18,6 +21,7 @@ class UserController extends AbstractController
     public function index(UserRepository $userRepository)
     {
         $users = $userRepository->findAll();
+
 
         return $this->render('user/index.html.twig', [
             'users' => $users,

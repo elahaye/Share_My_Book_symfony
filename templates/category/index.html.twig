@@ -19,7 +19,7 @@
             <td>{{category.name }}</td>
             <td>
                 <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                <a href="{{ path('category_delete', {'id': category.id}) }}" class="btn btn-warning"><i class="fas fa-ban"></i></a>
+                <a href="{{ path('category_delete', {'id': category.id}) }}" class="btn btn-warning" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette catégorie ?')"><i class="fas fa-ban"></i></a>
             </td>
         </tr> 
         {% endfor %}

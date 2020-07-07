@@ -23,7 +23,7 @@
         <td>{{user.email}}</td>
         <td>{{user.registrationDate | date('d/m/Y') }}</td>
         <td>
-            <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-warning"><i class="fas fa-user-slash"></i></a>
+            <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-warning" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')"><i class="fas fa-user-slash"></i></a>
         </td>
     </tr> 
     {% endfor %}

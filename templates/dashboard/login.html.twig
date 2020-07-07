@@ -4,18 +4,18 @@
 
 {% block body %}
 
-    <div class="w-auto m-3 p-2">
-        <div class="m-auto card border-warning mb-3" style="max-width: 30rem;">
-            <h1 class="card-header">Connexion</h1>
-            <div class="card-body">
-                <div class="m-3 p-2">
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                        <button type="submit" class="btn btn-warning mt-2">Connexion</button>
-                    {{ form_end(form) }}
-                </div>
+<div class="w-auto m-3 p-2">
+    <div class="m-auto card border-warning mb-3" style="max-width: 30rem;">
+        <h1 class="card-header">Connexion</h1>
+        <div class="card-body">
+            <div class="m-3 p-2">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-warning mt-2">Connexion</button>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}
