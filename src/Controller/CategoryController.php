@@ -6,14 +6,16 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
     /**
      * @Route("/categories", name="categories")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(CategoryRepository $categoryRepository)
     {
@@ -26,6 +28,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/categories/delete/{id}", name="category_delete")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Category $category, EntityManagerInterface $em)
     {
@@ -37,6 +40,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/categories/create", name="category_create")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request, EntityManagerInterface $em)
     {
@@ -60,6 +64,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/categories/edit/{id}", name="category_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Category $category, request $request, EntityManagerInterface $em)
     {

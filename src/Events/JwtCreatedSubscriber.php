@@ -8,12 +8,12 @@ class JwtCreatedSubscriber
 {
     public function updateJwtData(JWTCreatedEvent $event)
     {
-        // 1. Récupérer l'utilisateur (pour avoir son nickname)
+        // 1. Récupérer l'utilisateur (pour avoir son id)
         $user = $event->getUser();
 
-        // 2. Enrichir les data pour qu'elles contiennet ces données
+        // 2. Enrichir les data pour qu'elles contiennent ces données
         $data = $event->getData();
-        $data['nickname'] = $user->getNickname();
+        $data['id'] = $user->getId();
 
         $event->setData($data);
     }

@@ -16,8 +16,8 @@ class DashboardController extends AbstractController
      */
     public function index(UserRepository $userRepository, BooklistRepository $booklistRepository)
     {
-        $users = $userRepository->findAll();
-        $booklists = $booklistRepository->findAll();
+        $users = $userRepository->findBy(array(), array("registrationDate" => "DESC"));
+        $booklists = $booklistRepository->findBy(array(), array("createdAt" => "DESC"));
 
         return $this->render('dashboard/index.html.twig', [
             'users' => $users,

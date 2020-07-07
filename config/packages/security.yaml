@@ -57,8 +57,10 @@ security:
     # - { path: ^/profile, roles: ROLE_USER }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/booklists, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/media_objects, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - {
         path: ^/api/users,
         roles: IS_AUTHENTICATED_FULLY,
-        methods: [GET, PUT, DELETE],
+        methods: [PATCH, PUT, DELETE]
       }

@@ -45,7 +45,6 @@ class AppFixtures extends AbstractFixture
         $this->createMany(Book::class, 100, function (Book $book) {
             $book->setTitle($this->faker->catchPhrase)
                 ->setReferenceApi($this->faker->userName)
-                ->setSummary($this->faker->paragraphs(2, true))
                 ->setAuthor($this->faker->name())
                 ->setTotalPages($this->faker->numberBetween(100, 500))
                 ->setPublicationDate($this->faker->dateTimeBetween('-10 years'));

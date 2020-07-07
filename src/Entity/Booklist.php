@@ -4,16 +4,19 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BooklistRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=BooklistRepository::class)
  * @ApiResource(
  *   normalizationContext={"groups"={"booklist:read"}}
  * )
+ * @ApiFilter(SearchFilter::class, properties={"status","category"})
  */
 class Booklist
 {

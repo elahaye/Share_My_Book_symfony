@@ -4,20 +4,32 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
  *  normalizationContext={"groups"={"user:read"}},
- *  collectionOperations={"GET","POST"},
- *  itemOperations={"GET","PUT", "PATCH"}
+ *  collectionOperations={"GET","POST", "password"={
+ *      "controller": "App\Controller\EditUserController",
+ *      "method"="PUT",
+ *      "path"= "/users/update-password",
+ *      "deserialize"= false
+ *  }},
+ *  itemOperations={"GET","PUT", "PATCH"},
+ *  iri="http://schema.org/User"
  * )
+ * @ApiFilter(SearchFilter::class, properties={"booklists.status": "exact"})
  */
 class User implements UserInterface
 {
@@ -25,7 +37,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user:read"})
+     * @Groups({"user:read", "booklist:read"})
      */
     private $id;
 
@@ -37,6 +49,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user:read"})
      */
     private $roles = [];
 
@@ -48,12 +61,18 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read"})
+     * @Groups({"user:read", "booklist:read"})
      */
     private $nickname;
 
     /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @ApiProperty(iri="http://schema.org/image")
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "booklist:read"})
      */
     private $avatar;
 

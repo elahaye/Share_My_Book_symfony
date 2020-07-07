@@ -11,6 +11,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
+ * @ApiResource(
+ *   normalizationContext={"groups"={"book:read"}},
+ *   attributes={"pagination_enabled"=false}
+ * )
  */
 class Book
 {
@@ -18,43 +22,37 @@ class Book
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"user:read", "booklist:read"})
+     * @Groups({"user:read", "booklist:read","book:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "booklist:read"})
+     * @Groups({"user:read", "booklist:read", "book:read"})
      */
     private $referenceApi;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "booklist:read"})
+     * @Groups({"user:read", "booklist:read", "book:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "booklist:read"})
+     * @Groups({"user:read", "booklist:read", "book:read"})
      */
     private $author;
 
     /**
-     * @ORM\Column(type="text")
-     * @Groups({"user:read", "booklist:read"})
-     */
-    private $summary;
-
-    /**
      * @ORM\Column(type="date")
-     * @Groups({"user:read", "booklist:read"})
+     * @Groups({"user:read", "booklist:read", "book:read"})
      */
     private $publicationDate;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"user:read", "booklist:read"})
+     * @Groups({"user:read", "booklist:read", "book:read"})
      */
     private $totalPages;
 
@@ -62,6 +60,12 @@ class Book
      * @ORM\ManyToMany(targetEntity=Booklist::class, mappedBy="books")
      */
     private $booklists;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user:read", "booklist:read", "book:read"})
+     */
+    private $image;
 
     public function __construct()
     {
@@ -105,18 +109,6 @@ class Book
     public function setAuthor(string $author): self
     {
         $this->author = $author;
-
-        return $this;
-    }
-
-    public function getSummary(): ?string
-    {
-        return $this->summary;
-    }
-
-    public function setSummary(string $summary): self
-    {
-        $this->summary = $summary;
 
         return $this;
     }
@@ -169,6 +161,18 @@ class Book
             $this->booklists->removeElement($booklist);
             $booklist->removeBook($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

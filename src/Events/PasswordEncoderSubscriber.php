@@ -5,6 +5,7 @@ namespace App\Events;
 use Symfony\Component\HttpKernel\KernelEvents;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\User;
+use Doctrine\ORM\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

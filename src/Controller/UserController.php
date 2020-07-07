@@ -5,13 +5,15 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
     /**
      * @Route("/users", name="users")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(UserRepository $userRepository)
     {
@@ -24,6 +26,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/users/delete/{id}", name="user_delete")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(User $user, EntityManagerInterface $em)
     {
