@@ -18,13 +18,15 @@ class LoginType extends AbstractType
                 'label' => 'Email de connexion',
                 'attr' => [
                     'placeholder' => 'Adresse email'
-                ]
+                ],
+                'invalid_message' => 'Les identifiants entrés ne sont pas valides, veuillez réessayer.'
             ])
             ->add('_password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'attr' => [
                     'placeholder' => 'Mot de passe'
-                ]
+                ],
+                'invalid_message' => 'Les identifiants entrés ne sont pas valides, veuillez réessayer.'
             ]);
     }
 
